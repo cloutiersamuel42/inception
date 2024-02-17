@@ -1,11 +1,18 @@
+DATA_DIR = $(HOME)/data
 
 all:
-	@docker compose -f ./srcs/docker-compose.yml up -d --build
+	@echo Creating volume directories in $(DATA_DIR)... ; \
+	if [ ! -d $(DATA_DIR) ]; \
+	then \
+		mkdir $(DATA_DIR) && \
+		mkdir $(DATA_DIR)/mysql && \
+		mkdir $(DATA_DIR)/wordpress && \
+	fi;
+	
+	@cd srcs ; docker compose up -d --build
 
-stop:
-	@docker compose -f ./srcs/docker-compose.yml stop
-
-re: fclean all
+down:
+	@cd srcs ; docker compose down -v -t 1
 
 fclean:
 	rm -rf home/sam/data/
@@ -15,4 +22,4 @@ fclean:
 	docker volume rm -f $$(docker volume ls -q)
 	docker network rm -f $$(docker network ls -q)
 
-.PHONY: all stop fclean
+.PHONY: all down fclean

@@ -1,4 +1,5 @@
 version: '3'
+name: inception
 
 services:
   nginx:
@@ -47,13 +48,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/sam/data/wordpress #changer login
+      device: /home/scloutie/data/wordpress
       o: bind
   mariadb_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/sam/data/mysql #changer login
+      device: /home/scloutie/data/mysql
       o: bind
 
 networks:
