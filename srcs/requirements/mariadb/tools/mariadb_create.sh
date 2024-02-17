@@ -11,7 +11,7 @@ if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
 	mysql -u root  < inception.sql
 	chmod -R 777 /var/lib/mysql/$MYSQL_DATABASE
 	pkill mysql
-	sleep 2
+	sleep 5
 fi
 
 mysqld_safe
