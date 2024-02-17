@@ -10,6 +10,7 @@ RUN apt update && apt install -y \
 	php-pdo \
 	php-gd \
 	php-mbstring \
+	sendmail \
 	mariadb-client
 
 # Download wp-cli
@@ -29,9 +30,9 @@ WORKDIR /var/www/wp/
 RUN curl -O https://wordpress.org/wordpress-6.3.tar.gz \
 	&& tar xzf wordpress-6.3.tar.gz \
 	&& cp -r wordpress/* /var/www/wp \
-	&& rm -rf wordpress-6.3.tar.gz  \
+	&& rm -rf wordpress-6.3.tar.gz && rm -rf wordpress \
 	&& chown -R root:root /var/www/wp \
-	&& chmod 777 /var/www/wp/*
+	&& chmod -R 777 /var/www/wp
 
 # expose port a nginx
 EXPOSE 9000
@@ -39,3 +40,5 @@ EXPOSE 9000
 COPY ./tools/entry_point.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/entry_point.sh
 ENTRYPOINT [ "/usr/local/bin/entry_point.sh" ]
+
+#CMD ["/usr/sbin/php-fpm7.3", "-F"]

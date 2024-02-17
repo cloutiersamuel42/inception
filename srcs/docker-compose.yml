@@ -19,8 +19,6 @@ services:
     container_name: mariadb
     build: ./requirements/mariadb
     restart: always
-    ports:
-      - "3306:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
@@ -32,8 +30,6 @@ services:
     container_name: wordpress
     build: ./requirements/wordpress
     restart: always
-    ports:
-      - "9000:9000"
     depends_on:
       - mariadb
     volumes:
