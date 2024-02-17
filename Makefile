@@ -8,7 +8,7 @@ all:
 		mkdir -p $(DATA_DIR)/wordpress; \
 	fi;
 	
-	@cd srcs ; docker compose up --build
+	@cd srcs ; docker compose up -d
 
 down:
 	@cd srcs ; docker compose down -v -t 1

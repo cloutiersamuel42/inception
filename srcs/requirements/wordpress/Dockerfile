@@ -40,5 +40,3 @@ EXPOSE 9000
 COPY ./tools/entry_point.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/entry_point.sh
 ENTRYPOINT [ "/usr/local/bin/entry_point.sh" ]
-
-#CMD ["/usr/sbin/php-fpm7.3", "-F"]

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-if [ ! -f "/var/lib/mysql/inception.sql" ]; then
+if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
 	service mysql start
 	echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;" > inception.sql
 	echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" >> inception.sql
@@ -10,8 +10,8 @@ if [ ! -f "/var/lib/mysql/inception.sql" ]; then
 	echo "FLUSH PRIVILEGES;" >> inception.sql
 	mysql -u root  < inception.sql
 	chmod -R 777 /var/lib/mysql/$MYSQL_DATABASE
-	cp inception.sql /var/lib/mysql/
 	pkill mysql
+	sleep 2
 fi
 
 mysqld_safe
