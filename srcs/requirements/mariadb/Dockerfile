@@ -20,7 +20,3 @@ EXPOSE 3306
 COPY ./tools/mariadb_create.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/mariadb_create.sh
 ENTRYPOINT [ "/usr/local/bin/mariadb_create.sh" ]
-
-
-
-#CMD ["mysqld", "--bind-address=0.0.0.0"]
